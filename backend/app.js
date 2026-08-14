@@ -65,11 +65,12 @@ app.post("/api/signup", async (request, response) => {
         pass: "qebx suqz lxll obqm",
       },
     });
+     const otp = Math.floor(100000 + Math.random() * 900000);
     let mailOptions = {
       from: "muzans786@gmail.com",
       to: "muzammil.muhammad7782@gmail.com",
       subject: "Sending Email using Node.js",
-      html: emailVerificationTemplate(userobj),
+      html: emailVerificationTemplate(userObj, otp),
     };
     transporter.sendMail(mailOptions, function (error, info) {
       if (error) {

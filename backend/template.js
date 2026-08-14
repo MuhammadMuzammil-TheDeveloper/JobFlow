@@ -1,4 +1,4 @@
-export const emailVerificationTemplate = (name, otp) => {
+export const emailVerificationTemplate = (userObj, otp) => {
   return `
 <!DOCTYPE html>
 <html lang="en">
@@ -56,7 +56,7 @@ export const emailVerificationTemplate = (name, otp) => {
         line-height: 1.6;
         color: #5f6778;
       ">
-        Hi ${name},
+        Hi ${userObj.fullName},
       </p>
 
       <p style="
