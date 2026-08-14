@@ -1,8 +1,8 @@
 import express from "express";
 const PORT = process.env.PORT || 5000;
-// import nodemailer from "nodemailer"
+import nodemailer from "nodemailer";
 import dotenv from "dotenv";
-// import { sendOTPTemplate, welcomeUserTemplate } from "./templates.js"
+import { emailVerificationTemplate} from "./template.js"
 import mongoose from "mongoose";
 import UserModel from "./model/userSchema.js";
 import bcrypt from "bcryptjs";
@@ -58,7 +58,26 @@ app.post("/api/signup", async (request, response) => {
     };
 
     await UserModel.create(userObj);
-
+    let transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: "muzans786@gmail.com",
+        pass: "qebx suqz lxll obqm",
+      },
+    });
+    let mailOptions = {
+      from: "muzans786@gmail.com",
+      to: "muzammil.muhammad7782@gmail.com",
+      subject: "Sending Email using Node.js",
+      html: emailVerificationTemplate(userobj),
+    };
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log("Email sent: " + info.response);
+      }
+    });
     response.json({
       message: "user signUp successfully",
       status: true,
