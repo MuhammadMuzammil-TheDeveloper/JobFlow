@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In · CareerFlow</title>
+  <link rel="stylesheet" href="../css/global.css" />
+  <link rel="stylesheet" href="../css/auth.css" />
+</head>
+<body>
+  <div class="auth-shell">
+
+    <!-- Left: brand panel -->
+    <aside class="auth-brand">
+      <div class="auth-brand-top">
+        <a href="../index.html" class="brand-logo">
+          <span class="brand-logo-mark">CF</span>
+          CareerFlow
+        </a>
+      </div>
+
+      <div class="auth-brand-mid">
+        <h1>Your career. Your applications. One flow.</h1>
+        <p>Track every application, interview, and offer in one clean workspace built for job seekers and hiring teams alike.</p>
+
+        <div class="flow-illustration" aria-hidden="true">
+          <div class="flow-node is-filled">✓</div>
+          <div class="flow-line"></div>
+          <div class="flow-node">2</div>
+          <div class="flow-line"></div>
+          <div class="flow-node">3</div>
+        </div>
+      </div>
+
+      <div class="auth-brand-bottom">
+        Trusted by candidates and recruiters to move faster, together.
+      </div>
+    </aside>
+
+    <!-- Right: form panel -->
+    <main class="auth-panel">
+      <div class="auth-card card">
+
+        <div class="auth-mobile-logo">
+          <a href="../index.html" class="brand-logo" style="color: var(--color-text);">
+            <span class="brand-logo-mark" style="background: var(--color-primary);">CF</span>
+            CareerFlow
+          </a>
+        </div>
+
+        <div class="auth-card-header">
+          <h2>Sign in to your account</h2>
+          <p>Welcome back — pick up right where you left off.</p>
+        </div>
+
+        <div id="formAlert" class="alert alert-error" role="alert"></div>
+
+        <form id="loginForm" novalidate>
+          <div class="field">
+            <label for="email">Email</label>
+            <div class="input-wrap">
+              <input class="input" type="email" id="email" name="email" autocomplete="email" required />
+            </div>
+            <div class="field-error" id="emailError"></div>
+          </div>
+
+          <div class="field">
+            <label for="password">Password</label>
+            <div class="input-wrap">
+              <input class="input" type="password" id="password" name="password" autocomplete="current-password" required />
+              <button type="button" class="toggle-visibility" id="togglePassword" aria-label="Show password">👁</button>
+            </div>
+            <div class="field-error" id="passwordError"></div>
+          </div>
+
+          <div class="auth-row-between">
+            <label class="checkbox-field">
+              <input type="checkbox" id="rememberMe" />
+              Remember me
+            </label>
+            <a href="#" class="text-muted" style="font-size: 13px;">Forgot password?</a>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block" id="submitBtn">
+            <span class="spinner"></span>
+            <span class="btn-label">Sign In</span>
+          </button>
+        </form>
+
+        <p class="auth-footer-note">
+          Don't have an account? <a href="signup.html">Sign up</a>
+        </p>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/login.js"></script>
+</body>
+</html>

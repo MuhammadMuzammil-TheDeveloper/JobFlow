@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Verify Email · CareerFlow</title>
+  <link rel="stylesheet" href="../css/global.css" />
+  <link rel="stylesheet" href="../css/auth.css" />
+</head>
+<body>
+  <main class="auth-panel" style="min-height: 100vh;">
+    <div class="auth-card card verify-center">
+
+      <div class="auth-mobile-logo" style="display: flex; margin-bottom: var(--space-5);">
+        <a href="../index.html" class="brand-logo" style="color: var(--color-text);">
+          <span class="brand-logo-mark" style="background: var(--color-primary);">CF</span>
+          CareerFlow
+        </a>
+      </div>
+
+      <div class="verify-icon" aria-hidden="true">✉</div>
+
+      <h2 style="font-size: 20px; font-weight: 700; margin-bottom: var(--space-2);">Verify your email</h2>
+      <p class="text-muted" style="font-size: 13px;">
+        We sent a 6-digit verification code to <strong id="maskedEmail">your email</strong>.
+      </p>
+
+      <div id="formAlert" class="alert alert-error" role="alert" style="text-align: left;"></div>
+      <div id="successAlert" class="alert alert-success" role="status" style="text-align: left;"></div>
+
+      <form id="otpForm" novalidate>
+        <div class="otp-group" role="group" aria-label="6-digit verification code">
+          <input class="otp-digit" type="text" inputmode="numeric" maxlength="1" data-index="0" aria-label="Digit 1" />
+          <input class="otp-digit" type="text" inputmode="numeric" maxlength="1" data-index="1" aria-label="Digit 2" />
+          <input class="otp-digit" type="text" inputmode="numeric" maxlength="1" data-index="2" aria-label="Digit 3" />
+          <input class="otp-digit" type="text" inputmode="numeric" maxlength="1" data-index="3" aria-label="Digit 4" />
+          <input class="otp-digit" type="text" inputmode="numeric" maxlength="1" data-index="4" aria-label="Digit 5" />
+          <input class="otp-digit" type="text" inputmode="numeric" maxlength="1" data-index="5" aria-label="Digit 6" />
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block" id="submitBtn">
+          <span class="spinner"></span>
+          <span class="btn-label">Verify</span>
+        </button>
+      </form>
+
+      <div class="resend-row">
+        <span id="countdownText">Resend code in <strong id="countdown">60</strong>s</span>
+        <button type="button" class="resend-link" id="resendBtn" style="display: none;">Resend code</button>
+      </div>
+    </div>
+  </main>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/verify-email.js"></script>
+</body>
+</html>
