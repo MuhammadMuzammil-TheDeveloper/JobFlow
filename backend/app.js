@@ -2,7 +2,7 @@ import express from "express";
 const PORT = process.env.PORT || 5000;
 import nodemailer from "nodemailer";
 import dotenv from "dotenv";
-import { emailVerificationTemplate} from "./template.js"
+import { emailVerificationTemplate } from "./template.js";
 import mongoose from "mongoose";
 import UserModel from "./model/userSchema.js";
 import bcrypt from "bcryptjs";
@@ -23,72 +23,91 @@ mongoose
 
 app.post("/api/signup", async (request, response) => {
   try {
-    const body = request.body;
-    const { email, fullName, password, confirmPassword, role } = body;
+    const { email, fullName, password, confirmPassword, role } = request.body;
 
+    // 1. Validate required fields
     if (!email || !password || !fullName || !confirmPassword || !role) {
-      return response.json({
-        message: "required values are missing",
+      return response.status(400).json({
+        message: "Required values are missing",
         status: false,
       });
     }
 
-    // check user email
-    const user = await UserModel.findOne({ email });
-    if (user) {
-      return response.json({
-        message: "email address already exist",
-        status: false,
-      });
-    }
-
+    // 2. Check password confirmation
     if (password !== confirmPassword) {
-      return response.json({
-        message: "PAssword && confirm Password are not Match",
+      return response.status(400).json({
+        message: "Password and confirm password do not match",
         status: false,
       });
     }
+
+    // 3. Check if email already exists
+    const existingUser = await UserModel.findOne({ email });
+
+    if (existingUser) {
+      return response.status(409).json({
+        message: "Email address already exists",
+        status: false,
+      });
+    }
+
+    // 4. Hash password
     const hashPassword = await bcrypt.hash(password, 10);
 
+    // 5. Generate 6-digit OTP
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+
+    // 6. OTP expires after 10 minutes
+    const otpExpires = new Date(Date.now() + 10 * 60 * 1000);
+
+    // 7. Create user object
     const userObj = {
       email,
       fullName,
       role,
       password: hashPassword,
+
+      // Email verification
+      isEmailVerified: false,
+      emailVerificationOTP: otp,
+      emailVerificationOTPExpires: otpExpires,
     };
 
-    await UserModel.create(userObj);
-    let transporter = nodemailer.createTransport({
-      service: "gmail",
+    // 8. Save user in MongoDB
+    const newUser = await UserModel.create(userObj);
+
+    // 9. Create email transporter
+    const transporter = nodemailer.createTransport({
+      service: process.env.SMTP_SERVICE,
       auth: {
-        user: "muzans786@gmail.com",
-        pass: "qebx suqz lxll obqm",
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
       },
     });
-     const otp = Math.floor(100000 + Math.random() * 900000);
-    let mailOptions = {
-      from: "muzans786@gmail.com",
-      to: "muzammil.muhammad7782@gmail.com",
-      subject: "Sending Email using Node.js",
-      html: emailVerificationTemplate(userObj, otp),
+
+    // 10. Email options
+    const mailOptions = {
+      from: `"CareerFlow" <${process.env.SMTP_USER}>`,
+      to: email,
+      subject: "Verify your CareerFlow account",
+      html: emailVerificationTemplate(newUser, otp),
     };
-    transporter.sendMail(mailOptions, function (error, info) {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log("Email sent: " + info.response);
-      }
-    });
-    response.json({
-      message: "user signUp successfully",
+
+    // 11. Send email
+    await transporter.sendMail(mailOptions);
+
+    // 12. Response
+    return response.status(201).json({
+      message: "Account created successfully. OTP sent to your email.",
       status: true,
     });
   } catch (error) {
-    response.json({
-      message: error.message || "something went wrong",
+    console.error("Signup Error:", error);
+
+    return response.status(500).json({
+      message: error.message || "Something went wrong",
       status: false,
     });
   }
 });
-
 app.listen(PORT, () => console.log(`Server is Running on :${PORT}`));
