@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verify Email · CareerFlow</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="page-fade">
+  <main class="auth-container">
+    <div class="card" style="text-align: center;">
+      <h1 class="brand-title" style="margin-bottom: 2px;">CareerFlow</h1>
+      <h2 style="font-size: 1.25rem; font-weight: 700; margin-top: 16px; margin-bottom: 6px;">Verify your email</h2>
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px;">
+        We've sent a 6-digit verification code to your email.<br>
+        <strong style="color: var(--text-main);">m********@gmail.com</strong>
+      </p>
+
+      <div id="success-banner" class="success-banner">
+        ✓ Email verified successfully!
+      </div>
+
+      <!-- OTP 6-Digit Fields -->
+      <div class="otp-boxes">
+        <input type="text" maxlength="1" class="otp-field" autofocus>
+        <input type="text" maxlength="1" class="otp-field">
+        <input type="text" maxlength="1" class="otp-field">
+        <input type="text" maxlength="1" class="otp-field">
+        <input type="text" maxlength="1" class="otp-field">
+        <input type="text" maxlength="1" class="otp-field">
+      </div>
+
+      <button id="verify-btn" class="btn btn-primary" style="margin-bottom: 16px;">Verify Email</button>
+      <a href="auth.html" id="continue-btn" class="btn btn-primary" style="display: none; margin-bottom: 16px;">Continue</a>
+
+      <p style="font-size: 0.85rem; color: var(--text-muted);">
+        Didn't receive the code?<br>
+        <span id="resend-container">Resend in <span id="countdown-timer" style="font-weight: 600;">60s</span></span>
+        <button id="resend-btn" style="display: none; background: none; border: none; color: var(--primary); font-weight: 600; cursor: pointer; font-size: 0.85rem;">Resend OTP</button>
+      </p>
+    </div>
+  </main>
+  <script src="js/script.js"></script>
+</body>
+</html>

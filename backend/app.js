@@ -110,4 +110,61 @@ app.post("/api/signup", async (request, response) => {
     });
   }
 });
+app.post("/api/verify-email", async (request, response) => {
+  const { email, otp } = request.body;
+
+  if (!email || !otp) {
+    return response.status(400).json({
+      message: "Email and OTP are required",
+      status: false,
+    });
+  }
+
+  const user = await UserModel.findOne({ email });
+  if (!user) {
+    return response.status(404).json({
+      message: "User not found",
+      status: false,
+    });
+  }
+  if (user.isEmailVerified) {
+    return response.status(400).json({
+      message: "Email is already verified",
+      status: false,
+    });
+  }
+  if (!user.emailVerificationOTP) {
+    return response.status(400).json({
+      message: "No OTP found. Please request a new OTP.",
+      status: false,
+    });
+  }
+  if (
+    !user.emailVerificationOTPExpires ||
+    user.emailVerificationOTPExpires < new Date()
+  ) {
+    return response.status(400).json({
+      message: "OTP has expired. Please request a new OTP.",
+      status: false,
+    });
+  }
+
+  if (user.emailVerificationOTP !== otp) {
+    return response.status(400).json({
+      message: "Invalid OTP",
+      status: false,
+    });
+  }
+
+  user.isEmailVerified = true;
+  user.emailVerificationOTP = null;
+  user.emailVerificationOTPExpires = null;
+
+  await user.save();
+  return response.status(200).json({
+    message: "Email verified successfully",
+    status: true,
+  });
+});
+
 app.listen(PORT, () => console.log(`Server is Running on :${PORT}`));
