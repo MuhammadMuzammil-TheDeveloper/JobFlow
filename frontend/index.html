@@ -1,19 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CareerFlow</title>
-  <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CareerFlow</title>
+<link rel="stylesheet" href="css/style.css" />
+<style>
+  body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .splash {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+  .splash-mark {
+    width: 44px;
+    height: 44px;
+    border-radius: 13px;
+  }
+</style>
 </head>
-<body class="page-fade" id="splash-screen">
-  <div style="text-align: center;">
-    <h1 style="font-size: 2.25rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 8px;">CareerFlow</h1>
-    <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 24px;">Your career. Your applications. One flow.</p>
-    <div class="loading-dots">
-      <span></span><span></span><span></span>
-    </div>
+<body>
+  <div class="splash">
+    <span class="brand-mark splash-mark"></span>
+    <span class="brand" style="font-size:16px;">CareerFlow</span>
   </div>
-  <script src="js/script.js"></script>
+
+  <script src="js/config.js"></script>
+  <script>
+    // Entry point: send the person to wherever they actually belong.
+    // No UI to build here beyond a brief brand splash.
+    window.location.replace(isAuthenticated() ? "profile.html" : "login.html");
+  </script>
 </body>
 </html>

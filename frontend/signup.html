@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Create your account — CareerFlow</title>
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/auth.css" />
+</head>
+<body>
+
+<div class="auth-shell">
+
+  <!-- Form panel -->
+  <div class="auth-panel">
+    <a href="index.html" class="brand">
+      <span class="brand-mark"></span>
+      CareerFlow
+    </a>
+
+    <div class="auth-panel-body">
+      <div class="auth-card">
+        <div class="auth-card-head">
+          <h1>Create your account</h1>
+          <p>Start tracking every application in one place.</p>
+        </div>
+
+        <div id="formAlert" class="alert alert-error" role="alert">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 5.5v3.25M8 11.25h.008M14.5 8A6.5 6.5 0 1 1 1.5 8a6.5 6.5 0 0 1 13 0Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span id="formAlertText"></span>
+        </div>
+
+        <form id="signupForm" class="auth-form" novalidate>
+          <div class="field">
+            <label for="fullName">Full name</label>
+            <input type="text" id="fullName" name="fullName" autocomplete="name" placeholder="Muhammad Muzammil" />
+            <p class="error-text" id="fullNameError"></p>
+          </div>
+
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" autocomplete="email" placeholder="you@example.com" />
+            <p class="error-text" id="emailError"></p>
+          </div>
+
+          <div class="field">
+            <label for="password">Password</label>
+            <div class="input-wrap">
+              <input type="password" id="password" name="password" autocomplete="new-password" placeholder="At least 8 characters" />
+              <button type="button" class="password-toggle" data-toggle-for="password" aria-label="Show password">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M1.5 9S4 3.75 9 3.75 16.5 9 16.5 9 14 14.25 9 14.25 1.5 9 1.5 9Z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="9" r="2.25" stroke="currentColor" stroke-width="1.3"/></svg>
+              </button>
+            </div>
+            <p class="error-text" id="passwordError"></p>
+          </div>
+
+          <div class="field">
+            <label for="confirmPassword">Confirm password</label>
+            <div class="input-wrap">
+              <input type="password" id="confirmPassword" name="confirmPassword" autocomplete="new-password" placeholder="Re-enter your password" />
+              <button type="button" class="password-toggle" data-toggle-for="confirmPassword" aria-label="Show password">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M1.5 9S4 3.75 9 3.75 16.5 9 16.5 9 14 14.25 9 14.25 1.5 9 1.5 9Z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="9" r="2.25" stroke="currentColor" stroke-width="1.3"/></svg>
+              </button>
+            </div>
+            <p class="error-text" id="confirmPasswordError"></p>
+          </div>
+
+          <div class="field">
+            <label>I'm signing up as</label>
+            <div class="role-select">
+              <label class="role-option">
+                <input type="radio" name="role" value="candidate" checked />
+                <span class="role-option-card">
+                  <span class="role-name">Candidate</span>
+                  <span class="role-desc">Looking for jobs</span>
+                </span>
+              </label>
+              <label class="role-option">
+                <input type="radio" name="role" value="recruiter" />
+                <span class="role-option-card">
+                  <span class="role-name">Recruiter</span>
+                  <span class="role-desc">Hiring talent</span>
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary" id="signupBtn">
+            <span class="spinner"></span>
+            <span class="btn-label">Create account</span>
+          </button>
+        </form>
+
+        <p class="auth-foot">
+          Already have an account? <a href="login.html">Log in</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Signature showcase panel -->
+  <div class="auth-showcase">
+    <div class="showcase-brand">
+      <span class="brand">
+        <span class="brand-mark"></span>
+        CareerFlow
+      </span>
+    </div>
+
+    <div class="flow-rail">
+      <div class="flow-rail-track">
+        <div class="flow-station is-active">
+          <span class="flow-station-line"></span>
+          <span class="flow-station-dot">
+            <svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="flow-station-text">
+            <span class="label">Step 1</span>
+            <span class="title">Create your account</span>
+          </span>
+        </div>
+        <div class="flow-station">
+          <span class="flow-station-line"></span>
+          <span class="flow-station-dot"></span>
+          <span class="flow-station-text">
+            <span class="label">Step 2</span>
+            <span class="title">Verify your email</span>
+          </span>
+        </div>
+        <div class="flow-station">
+          <span class="flow-station-dot"></span>
+          <span class="flow-station-text">
+            <span class="label">Step 3</span>
+            <span class="title">Log in &amp; get to work</span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <p class="showcase-quote">
+      "Your career. Your applications. One flow."
+      <span>Everything you're tracking, in one calm view.</span>
+    </p>
+  </div>
+
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/signup.js"></script>
+</body>
+</html>
