@@ -1,7 +1,3 @@
-/* ==========================================================
-   CareerFlow — Signup Page Logic
-   ========================================================== */
-
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("signupForm");
   const submitBtn = document.getElementById("signupBtn");
@@ -21,7 +17,10 @@ document.addEventListener("DOMContentLoaded", () => {
       const input = document.getElementById(btn.dataset.toggleFor);
       const showing = input.type === "text";
       input.type = showing ? "password" : "text";
-      btn.setAttribute("aria-label", showing ? "Show password" : "Hide password");
+      btn.setAttribute(
+        "aria-label",
+        showing ? "Show password" : "Hide password",
+      );
     });
   });
 
@@ -42,14 +41,11 @@ document.addEventListener("DOMContentLoaded", () => {
     setLoading(true);
 
     try {
-      // Matches POST /api/signup exactly: { email, fullName, password, confirmPassword, role }
       const data = await apiRequest("/api/signup", {
         method: "POST",
         body: values,
       });
 
-      // Backend returns { message, status: true } on 201 — no token here,
-      // the account still needs OTP verification before login.
       setPendingEmail(values.email);
       window.location.href = "verify-otp.html";
     } catch (err) {

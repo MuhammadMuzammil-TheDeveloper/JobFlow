@@ -1,125 +1,199 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Verify your email — CareerFlow</title>
-<link rel="stylesheet" href="css/style.css" />
-<link rel="stylesheet" href="css/auth.css" />
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Verify your email — CareerFlow</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/auth.css" />
+  </head>
+  <body>
+    <div class="auth-shell">
+      <!-- Form panel -->
+      <div class="auth-panel">
+        <a href="index.html" class="brand">
+          <span class="brand-mark"></span>
+          CareerFlow
+        </a>
 
-<div class="auth-shell">
-
-  <!-- Form panel -->
-  <div class="auth-panel">
-    <a href="index.html" class="brand">
-      <span class="brand-mark"></span>
-      CareerFlow
-    </a>
-
-    <div class="auth-panel-body">
-      <div class="auth-card">
-        <div class="auth-card-head">
-          <h1>Verify your email</h1>
-          <p>Enter the 6-digit code sent to your email.</p>
-          <div class="otp-email" id="otpEmail">
-            <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M1.5 3.5h10a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1h-10a1 1 0 0 1-1-1v-5a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.1"/><path d="m1 4 5.5 4L12 4" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span id="otpEmailText">—</span>
-          </div>
-        </div>
-
-        <div id="formAlert" class="alert alert-error" role="alert">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 5.5v3.25M8 11.25h.008M14.5 8A6.5 6.5 0 1 1 1.5 8a6.5 6.5 0 0 1 13 0Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <span id="formAlertText"></span>
-        </div>
-
-        <div id="formSuccess" class="alert alert-success" role="status">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5 6.4 11.6 3 8.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <span id="formSuccessText"></span>
-        </div>
-
-        <form id="otpForm" class="auth-form" novalidate>
-          <div class="field">
-            <label for="otp-0" class="visually-hidden">6-digit verification code</label>
-            <div class="otp-inputs" id="otpInputs">
-              <input type="text" inputmode="numeric" maxlength="1" id="otp-0" aria-label="Digit 1" />
-              <input type="text" inputmode="numeric" maxlength="1" id="otp-1" aria-label="Digit 2" />
-              <input type="text" inputmode="numeric" maxlength="1" id="otp-2" aria-label="Digit 3" />
-              <input type="text" inputmode="numeric" maxlength="1" id="otp-3" aria-label="Digit 4" />
-              <input type="text" inputmode="numeric" maxlength="1" id="otp-4" aria-label="Digit 5" />
-              <input type="text" inputmode="numeric" maxlength="1" id="otp-5" aria-label="Digit 6" />
+        <div class="auth-panel-body">
+          <div class="auth-card">
+            <div class="auth-card-head">
+              <h1>Verify your email</h1>
+              <p>Enter the 6-digit code sent to your email.</p>
+              <div class="otp-email" id="otpEmail">
+                <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+                  <path
+                    d="M1.5 3.5h10a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1h-10a1 1 0 0 1-1-1v-5a1 1 0 0 1 1-1Z"
+                    stroke="currentColor"
+                    stroke-width="1.1"
+                  />
+                  <path
+                    d="m1 4 5.5 4L12 4"
+                    stroke="currentColor"
+                    stroke-width="1.1"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <span id="otpEmailText">—</span>
+              </div>
             </div>
-            <p class="error-text" id="otpError"></p>
+
+            <div id="formAlert" class="alert alert-error" role="alert">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path
+                  d="M8 5.5v3.25M8 11.25h.008M14.5 8A6.5 6.5 0 1 1 1.5 8a6.5 6.5 0 0 1 13 0Z"
+                  stroke="currentColor"
+                  stroke-width="1.4"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <span id="formAlertText"></span>
+            </div>
+
+            <div id="formSuccess" class="alert alert-success" role="status">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path
+                  d="M13.5 4.5 6.4 11.6 3 8.2"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <span id="formSuccessText"></span>
+            </div>
+
+            <form id="otpForm" class="auth-form" novalidate>
+              <div class="field">
+                <label for="otp-0" class="visually-hidden"
+                  >6-digit verification code</label
+                >
+                <div class="otp-inputs" id="otpInputs">
+                  <input
+                    type="text"
+                    inputmode="numeric"
+                    maxlength="1"
+                    id="otp-0"
+                    aria-label="Digit 1"
+                  />
+                  <input
+                    type="text"
+                    inputmode="numeric"
+                    maxlength="1"
+                    id="otp-1"
+                    aria-label="Digit 2"
+                  />
+                  <input
+                    type="text"
+                    inputmode="numeric"
+                    maxlength="1"
+                    id="otp-2"
+                    aria-label="Digit 3"
+                  />
+                  <input
+                    type="text"
+                    inputmode="numeric"
+                    maxlength="1"
+                    id="otp-3"
+                    aria-label="Digit 4"
+                  />
+                  <input
+                    type="text"
+                    inputmode="numeric"
+                    maxlength="1"
+                    id="otp-4"
+                    aria-label="Digit 5"
+                  />
+                  <input
+                    type="text"
+                    inputmode="numeric"
+                    maxlength="1"
+                    id="otp-5"
+                    aria-label="Digit 6"
+                  />
+                </div>
+                <p class="error-text" id="otpError"></p>
+              </div>
+
+              <button type="submit" class="btn btn-primary" id="verifyBtn">
+                <span class="spinner"></span>
+                <span class="btn-label">Verify email</span>
+              </button>
+            </form>
+
+            <div class="otp-resend-row">
+              <span>Didn't receive the code?</span>
+              <button type="button" class="btn-link" id="resendBtn">
+                Resend OTP
+              </button>
+              <span class="otp-countdown" id="otpCountdown"></span>
+            </div>
+
+            <p class="auth-foot">
+              Wrong email? <a href="signup.html">Start over</a>
+            </p>
           </div>
+        </div>
+      </div>
 
-          <button type="submit" class="btn btn-primary" id="verifyBtn">
-            <span class="spinner"></span>
-            <span class="btn-label">Verify email</span>
-          </button>
-        </form>
-
-        <div class="otp-resend-row">
-          <span>Didn't receive the code?</span>
-          <button type="button" class="btn-link" id="resendBtn">Resend OTP</button>
-          <span class="otp-countdown" id="otpCountdown"></span>
+      <!-- Signature showcase panel -->
+      <div class="auth-showcase">
+        <div class="showcase-brand">
+          <span class="brand">
+            <span class="brand-mark"></span>
+            CareerFlow
+          </span>
         </div>
 
-        <p class="auth-foot">
-          Wrong email? <a href="signup.html">Start over</a>
+        <div class="flow-rail">
+          <div class="flow-rail-track">
+            <div class="flow-station is-complete">
+              <span class="flow-station-line"></span>
+              <span class="flow-station-dot">
+                <svg viewBox="0 0 12 12" fill="none">
+                  <path
+                    d="M2 6l3 3 5-6"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </span>
+              <span class="flow-station-text">
+                <span class="label">Step 1</span>
+                <span class="title">Create your account</span>
+              </span>
+            </div>
+            <div class="flow-station is-active">
+              <span class="flow-station-line"></span>
+              <span class="flow-station-dot"></span>
+              <span class="flow-station-text">
+                <span class="label">Step 2</span>
+                <span class="title">Verify your email</span>
+              </span>
+            </div>
+            <div class="flow-station">
+              <span class="flow-station-dot"></span>
+              <span class="flow-station-text">
+                <span class="label">Step 3</span>
+                <span class="title">Log in &amp; get to work</span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <p class="showcase-quote">
+          "A few digits between you and your pipeline."
+          <span>Codes expire after 10 minutes — resend anytime.</span>
         </p>
       </div>
     </div>
-  </div>
 
-  <!-- Signature showcase panel -->
-  <div class="auth-showcase">
-    <div class="showcase-brand">
-      <span class="brand">
-        <span class="brand-mark"></span>
-        CareerFlow
-      </span>
-    </div>
-
-    <div class="flow-rail">
-      <div class="flow-rail-track">
-        <div class="flow-station is-complete">
-          <span class="flow-station-line"></span>
-          <span class="flow-station-dot">
-            <svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </span>
-          <span class="flow-station-text">
-            <span class="label">Step 1</span>
-            <span class="title">Create your account</span>
-          </span>
-        </div>
-        <div class="flow-station is-active">
-          <span class="flow-station-line"></span>
-          <span class="flow-station-dot"></span>
-          <span class="flow-station-text">
-            <span class="label">Step 2</span>
-            <span class="title">Verify your email</span>
-          </span>
-        </div>
-        <div class="flow-station">
-          <span class="flow-station-dot"></span>
-          <span class="flow-station-text">
-            <span class="label">Step 3</span>
-            <span class="title">Log in &amp; get to work</span>
-          </span>
-        </div>
-      </div>
-    </div>
-
-    <p class="showcase-quote">
-      "A few digits between you and your pipeline."
-      <span>Codes expire after 10 minutes — resend anytime.</span>
-    </p>
-  </div>
-
-</div>
-
-<script src="js/config.js"></script>
-<script src="js/verify-otp.js"></script>
-</body>
+    <script src="js/config.js"></script>
+    <script src="js/verify-otp.js"></script>
+  </body>
 </html>

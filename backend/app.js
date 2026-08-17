@@ -2,6 +2,7 @@ import express from "express";
 const PORT = process.env.PORT || 5000;
 import nodemailer from "nodemailer";
 import cors from "cors";
+import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import { emailVerificationTemplate } from "./template.js";
 import mongoose from "mongoose";
@@ -15,7 +16,7 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors()); 
+app.use(cors());
 
 const URI = process.env.MONGODB_URI;
 mongoose
@@ -201,14 +202,10 @@ app.post("/api/resend-otp", async (request, response) => {
     }
 
     // 4. Generate new OTP
-    const newOTP = Math.floor(
-      100000 + Math.random() * 900000
-    ).toString();
+    const newOTP = Math.floor(100000 + Math.random() * 900000).toString();
 
     // 5. Set new expiry (10 minutes)
-    const newOTPExpires = new Date(
-      Date.now() + 10 * 60 * 1000
-    );
+    const newOTPExpires = new Date(Date.now() + 10 * 60 * 1000);
 
     // 6. Update user
     user.emailVerificationOTP = newOTP;
@@ -241,10 +238,70 @@ app.post("/api/resend-otp", async (request, response) => {
       message: "New OTP has been sent to your email",
       status: true,
     });
-
   } catch (error) {
     console.error("Resend OTP Error:", error);
 
+    return response.status(500).json({
+      message: error.message || "Something went wrong",
+      status: false,
+    });
+  }
+});
+
+app.post("/api/login", async (request, response) => {
+  try {
+    const { email, password } = request.body;
+
+    if (!email || !password) {
+      return response.status(400).json({
+        message: "Email and password are required",
+        status: false,
+      });
+    }
+    const user = await UserModel.findOne({ email });
+    if (!user) {
+      return response.status(401).json({
+        message: "Invalid email or password",
+        status: false,
+      });
+    }
+
+    if (!user.isEmailVerified) {
+      return response.status(403).json({
+        message: "plase verify your email before logging in",
+        status: false,
+      });
+    }
+
+    const isPasswordMatch = await bcrypt.compare(password, user.password);
+    if (!isPasswordMatch) {
+      return response.status(401).json({
+        message: "Invalid email or password",
+        status: false,
+      });
+    }
+    const token = jwt.sign(
+      {
+        userID: user._id,
+        role: user.role,
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: process.env.JWT_EXPIRES_IN || "1h" },
+    );
+    return response.status(200).json({
+      message: "Login successful",
+      status: true,
+      token,
+      user: {
+        id: user._id,
+        fullName: user.fullName,
+        email: user.email,
+        role: user.role,
+        isEmailVerified: user.isEmailVerified,
+      },
+    });
+  } catch (error) {
+    console.error("Login Error:", error);
     return response.status(500).json({
       message: error.message || "Something went wrong",
       status: false,

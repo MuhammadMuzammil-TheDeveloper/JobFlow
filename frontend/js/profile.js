@@ -1,26 +1,9 @@
-/* ==========================================================
-   CareerFlow — Profile Page Logic
-
-   Per the brief: no separate "get profile" API exists, so this
-   reads the user object stored locally at login time (see the
-   TODO in js/login.js — that's the same object used here).
-
-   ⚠️ Field names below (fullName, role, isEmailVerified,
-   createdAt) are taken directly from the User schema fields
-   visible in your signup handler (UserModel.create({ email,
-   fullName, role, isEmailVerified, ... })). The full schema
-   file itself wasn't included, so if it defines different
-   field names (e.g. `name` instead of `fullName`, or a
-   different verification flag), update FIELD_MAP below —
-   nothing else needs to change.
-   ========================================================== */
-
 const FIELD_MAP = {
   fullName: "fullName",
   email: "email",
   role: "role",
   isEmailVerified: "isEmailVerified",
-  createdAt: "createdAt", // Mongoose timestamps default to this if `{ timestamps: true }` is set
+  createdAt: "createdAt", 
 };
 
 document.addEventListener("DOMContentLoaded", () => {

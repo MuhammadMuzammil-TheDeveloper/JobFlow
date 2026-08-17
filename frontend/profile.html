@@ -1,70 +1,73 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Your profile — CareerFlow</title>
-<link rel="stylesheet" href="css/style.css" />
-<link rel="stylesheet" href="css/profile.css" />
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your profile — CareerFlow</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/profile.css" />
+  </head>
+  <body>
+    <div class="profile-shell">
+      <header class="profile-topbar">
+        <a href="index.html" class="brand">
+          <span class="brand-mark"></span>
+          CareerFlow
+        </a>
+        <button
+          type="button"
+          class="btn btn-secondary logout-btn"
+          id="logoutBtn"
+        >
+          Log out
+        </button>
+      </header>
 
-<div class="profile-shell">
+      <main class="profile-main">
+        <div class="profile-content">
+          <div id="profileLoading" class="profile-skeleton">
+            Loading your profile…
+          </div>
 
-  <header class="profile-topbar">
-    <a href="index.html" class="brand">
-      <span class="brand-mark"></span>
-      CareerFlow
-    </a>
-    <button type="button" class="btn btn-secondary logout-btn" id="logoutBtn">Log out</button>
-  </header>
+          <div id="profileBody" style="display: none">
+            <div class="profile-header">
+              <div class="profile-avatar" id="profileAvatar">—</div>
+              <div class="profile-header-text">
+                <h1 id="profileName">—</h1>
+                <p id="profileEmail">—</p>
+              </div>
+            </div>
 
-  <main class="profile-main">
-    <div class="profile-content">
+            <div class="profile-card">
+              <p class="profile-card-title">Profile information</p>
 
-      <div id="profileLoading" class="profile-skeleton">Loading your profile…</div>
-
-      <div id="profileBody" style="display:none;">
-        <div class="profile-header">
-          <div class="profile-avatar" id="profileAvatar">—</div>
-          <div class="profile-header-text">
-            <h1 id="profileName">—</h1>
-            <p id="profileEmail">—</p>
+              <div class="profile-row">
+                <span class="profile-row-label">Full name</span>
+                <span class="profile-row-value" id="rowFullName">—</span>
+              </div>
+              <div class="profile-row">
+                <span class="profile-row-label">Email</span>
+                <span class="profile-row-value" id="rowEmail">—</span>
+              </div>
+              <div class="profile-row">
+                <span class="profile-row-label">Role</span>
+                <span class="profile-row-value" id="rowRole">—</span>
+              </div>
+              <div class="profile-row">
+                <span class="profile-row-label">Verification status</span>
+                <span class="profile-row-value" id="rowVerified">—</span>
+              </div>
+              <div class="profile-row">
+                <span class="profile-row-label">Member since</span>
+                <span class="profile-row-value" id="rowCreatedAt">—</span>
+              </div>
+            </div>
           </div>
         </div>
-
-        <div class="profile-card">
-          <p class="profile-card-title">Profile information</p>
-
-          <div class="profile-row">
-            <span class="profile-row-label">Full name</span>
-            <span class="profile-row-value" id="rowFullName">—</span>
-          </div>
-          <div class="profile-row">
-            <span class="profile-row-label">Email</span>
-            <span class="profile-row-value" id="rowEmail">—</span>
-          </div>
-          <div class="profile-row">
-            <span class="profile-row-label">Role</span>
-            <span class="profile-row-value" id="rowRole">—</span>
-          </div>
-          <div class="profile-row">
-            <span class="profile-row-label">Verification status</span>
-            <span class="profile-row-value" id="rowVerified">—</span>
-          </div>
-          <div class="profile-row">
-            <span class="profile-row-label">Member since</span>
-            <span class="profile-row-value" id="rowCreatedAt">—</span>
-          </div>
-        </div>
-
-      </div>
+      </main>
     </div>
-  </main>
 
-</div>
-
-<script src="js/config.js"></script>
-<script src="js/profile.js"></script>
-</body>
+    <script src="js/config.js"></script>
+    <script src="js/profile.js"></script>
+  </body>
 </html>

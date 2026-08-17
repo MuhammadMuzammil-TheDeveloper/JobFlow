@@ -1,41 +1,43 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>CareerFlow</title>
-<link rel="stylesheet" href="css/style.css" />
-<style>
-  body {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .splash {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 14px;
-  }
-  .splash-mark {
-    width: 44px;
-    height: 44px;
-    border-radius: 13px;
-  }
-</style>
-</head>
-<body>
-  <div class="splash">
-    <span class="brand-mark splash-mark"></span>
-    <span class="brand" style="font-size:16px;">CareerFlow</span>
-  </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CareerFlow</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      body {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .splash {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+      }
+      .splash-mark {
+        width: 44px;
+        height: 44px;
+        border-radius: 13px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="splash">
+      <span class="brand-mark splash-mark"></span>
+      <span class="brand" style="font-size: 16px">CareerFlow</span>
+    </div>
 
-  <script src="js/config.js"></script>
-  <script>
-    // Entry point: send the person to wherever they actually belong.
-    // No UI to build here beyond a brief brand splash.
-    window.location.replace(isAuthenticated() ? "profile.html" : "login.html");
-  </script>
-</body>
+    <script src="js/config.js"></script>
+    <script>
+      // Entry point: send the person to wherever they actually belong.
+      // No UI to build here beyond a brief brand splash.
+      window.location.replace(
+        isAuthenticated() ? "profile.html" : "login.html",
+      );
+    </script>
+  </body>
 </html>

@@ -1,7 +1,3 @@
-/* ==========================================================
-   CareerFlow — OTP Verification Page Logic
-   ========================================================== */
-
 const RESEND_COOLDOWN_SECONDS = 60;
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -18,11 +14,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const otpError = document.getElementById("otpError");
   const inputs = Array.from(document.querySelectorAll("#otpInputs input"));
   let countdownTimer = null;
-  // No pending email in storage — the person likely landed here directly.
   if (!email) {
     otpEmailText.textContent = "no email on file";
-    showFormAlert("We couldn't find a pending verification. Please sign up again.");
-    form.querySelectorAll("input, button").forEach((el) => (el.disabled = true));
+    showFormAlert(
+      "We couldn't find a pending verification. Please sign up again.",
+    );
+    form
+      .querySelectorAll("input, button")
+      .forEach((el) => (el.disabled = true));
     resendBtn.disabled = true;
   } else {
     otpEmailText.textContent = email;
@@ -46,7 +45,6 @@ document.addEventListener("DOMContentLoaded", () => {
     setLoading(verifyBtn, true);
 
     try {
-      // Matches POST /api/verify-email exactly: { email, otp }
       const data = await apiRequest("/api/verify-email", {
         method: "POST",
         body: { email, otp },
@@ -59,8 +57,6 @@ document.addEventListener("DOMContentLoaded", () => {
         window.location.href = "login.html";
       }, 1200);
     } catch (err) {
-      // Backend distinguishes expired vs invalid vs already-verified via `message`;
-      // we surface it directly since it already matches the required copy.
       setOtpError(err.message);
       inputs.forEach((i) => i.classList.add("has-error"));
     } finally {
@@ -75,7 +71,6 @@ document.addEventListener("DOMContentLoaded", () => {
     setLoading(resendBtn, true, "Resend OTP");
 
     try {
-      // Matches POST /api/resend-otp exactly: { email }
       const data = await apiRequest("/api/resend-otp", {
         method: "POST",
         body: { email },
@@ -94,8 +89,6 @@ document.addEventListener("DOMContentLoaded", () => {
       setLoading(resendBtn, false, "Resend OTP");
     }
   });
-
-  /* ---------- OTP input behavior ---------- */
 
   function setupOtpInputs() {
     inputs.forEach((input, index) => {
@@ -129,8 +122,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* ---------- Resend cooldown ---------- */
-
   function startCountdown() {
     let remaining = RESEND_COOLDOWN_SECONDS;
     resendBtn.disabled = true;
@@ -152,8 +143,6 @@ document.addEventListener("DOMContentLoaded", () => {
   function updateCountdownText(seconds) {
     countdownEl.textContent = `Resend available in ${seconds}s`;
   }
-
-  /* ---------- UI helpers ---------- */
 
   function setOtpError(message) {
     otpError.textContent = message;

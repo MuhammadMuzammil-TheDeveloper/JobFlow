@@ -1,22 +1,3 @@
-/* ==========================================================
-   CareerFlow — Login Page Logic
-
-   ⚠️ INCOMPLETE ON PURPOSE — see the block marked TODO below.
-
-   Your project brief referenced a login API, but the actual
-   endpoint code was never pasted in (the section just said
-   "PASTE MY LOGIN API HERE"). The request side below is safe
-   to ship as-is — POST /api/login with { email, password } is
-   the only reasonable shape for a login form. The RESPONSE side
-   is what's unsafe to guess: whether you return a JWT, under
-   what property name, whether the user object is nested, and
-   whether isEmailVerified / role live on it.
-
-   Once you share your real /api/login handler, only the single
-   block below needs updating — everything else (validation,
-   loading states, error handling, redirect) already works.
-   ========================================================== */
-
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("loginForm");
   const loginBtn = document.getElementById("loginBtn");
@@ -39,7 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // If a fresh signup verification just happened, greet them.
   if (getPendingEmail() === null && document.referrer.includes("verify-otp.html")) {
     showFormSuccess("Email verified successfully. Log in to continue.");
   }
@@ -60,23 +40,11 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       const data = await apiRequest("/api/login", {
         method: "POST",
-        body: values, // { email, password } — matches any standard login handler
+        body: values, 
       });
 
-      /* ==================== TODO: confirm against your real API ====================
-         Replace the two lines below once you've shared the actual /api/login
-         response shape. Common examples of what `data` might look like:
-
-           { status: true, token: "...", user: { fullName, email, role, ... } }
-           { status: true, data: { accessToken: "...", user: {...} } }
-           { status: true, user: {...} }  // cookie-based session, no token in body
-
-         For now this assumes the first shape as a starting point ONLY —
-         verify it against your handler before relying on it.
-      */
       const token = data.token;
       const user = data.user;
-      /* ================================================================================ */
 
       if (token) localStorage.setItem(STORAGE_KEYS.TOKEN, token);
       if (user) localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(user));

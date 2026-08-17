@@ -1,24 +1,11 @@
-/* ==========================================================
-   CareerFlow — Config & Shared Auth Helpers
-   ========================================================== */
-
-// Single source of truth for the API origin. Change this in one
-// place (e.g. when you deploy) instead of editing every file.
 const API_BASE_URL = "http://localhost:5000";
 
-// Keys used in localStorage so the rest of the app never
-// hardcodes raw strings.
 const STORAGE_KEYS = {
-  PENDING_EMAIL: "careerflow_pending_email", // email awaiting OTP verification
-  TOKEN: "careerflow_token",                 // TODO: confirm this matches your /api/login response
-  USER: "careerflow_user",                   // TODO: confirm this matches your /api/login response
+  PENDING_EMAIL: "careerflow_pending_email", 
+  TOKEN: "careerflow_token",                 
+  USER: "careerflow_user",                  
 };
 
-/**
- * Wrapper around fetch() that talks to the CareerFlow API.
- * Centralizes JSON headers, base URL, and error normalization
- * so every page handles failures the same way.
- */
 async function apiRequest(path, { method = "GET", body, auth = false } = {}) {
   const headers = { "Content-Type": "application/json" };
 
@@ -45,7 +32,7 @@ async function apiRequest(path, { method = "GET", body, auth = false } = {}) {
   try {
     data = await response.json();
   } catch {
-    // Non-JSON response body — fall through with data = null
+   
   }
 
   if (!response.ok) {
@@ -71,7 +58,6 @@ function defaultMessageForStatus(status) {
   }
 }
 
-/* ---------- Pending signup email (used by the OTP page) ---------- */
 
 function setPendingEmail(email) {
   localStorage.setItem(STORAGE_KEYS.PENDING_EMAIL, email);
@@ -85,11 +71,6 @@ function clearPendingEmail() {
   localStorage.removeItem(STORAGE_KEYS.PENDING_EMAIL);
 }
 
-/* ---------- Auth session helpers ----------
-   NOTE: getToken/getCurrentUser/isAuthenticated/logout are wired
-   to STORAGE_KEYS.TOKEN / STORAGE_KEYS.USER as placeholders.
-   These need to be confirmed once the real /api/login response
-   shape is available — see login.js for the TODO. */
 
 function getToken() {
   return localStorage.getItem(STORAGE_KEYS.TOKEN);
